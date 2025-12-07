@@ -1,0 +1,52 @@
+-- Validation Queries 
+
+-- 1. Check all data in each table
+PROMPT === MINE_SITE ===
+SELECT * FROM MINE_SITE;
+
+PROMPT === EMPLOYEE ===
+SELECT * FROM EMPLOYEE;
+
+PROMPT === VIOLATION ===
+SELECT * FROM VIOLATION;
+
+PROMPT === INSPECTION ===
+SELECT * FROM INSPECTION;
+
+PROMPT === RECOMMENDATION ===
+SELECT * FROM RECOMMENDATION;
+
+-- 2. Join Violations with Employee and Site
+PROMPT === Violations with Employee and Site ===
+SELECT 
+    v.ViolationID, 
+    e.Name AS EmployeeName, 
+    m.SiteName, 
+    v.Type, 
+    v.Severity
+FROM VIOLATION v
+JOIN EMPLOYEE e ON v.EmployeeID = e.EmployeeID
+JOIN MINE_SITE m ON e.SiteID = m.SiteID
+ORDER BY v.ViolationID;
+
+-- 3. Aggregation: Count Violations by Severity
+PROMPT === Count Violations by Severity ===
+SELECT Severity, COUNT(*) AS TotalViolations
+FROM VIOLATION
+GROUP BY Severity
+ORDER BY 
+    CASE 
+        WHEN Severity='Critical' THEN 1
+        WHEN Severity='High' THEN 2
+        WHEN Severity='Medium' THEN 3
+        WHEN Severity='Low' THEN 4
+        ELSE 5
+    END;
+
+-- 4. Subquery: Recommendations for Critical Violations
+PROMPT === Recommendations for Critical Violations ===
+SELECT r.RecommendationID, r.Action, r.Status, v.ViolationID, v.Type, v.Severity
+FROM RECOMMENDATION r
+JOIN VIOLATION v ON r.ViolationID = v.ViolationID
+WHERE v.Severity='Critical'
+ORDER BY r.RecommendationID;
