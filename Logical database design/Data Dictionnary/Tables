@@ -1,1 +1,36 @@
+*Customer Table*  
 
+| Column Name | Data Type    | Key   | Constraints              | Description                         |
+| ----------- | ------------ | ----- | ------------------------ | ----------------------------------- |
+| CustomerID  | INT          |  PK   | NOT NULL, AUTO_INCREMENT | Unique identifier for each customer |
+| FirstName   | VARCHAR(50)  |       | NOT NULL                 | Customer first name                 |
+| LastName    | VARCHAR(50)  |       | NOT NULL                 | Customer last name                  |
+| Email       | VARCHAR(100) |       | UNIQUE, NOT NULL         | Customer email for contact          |
+| Phone       | VARCHAR(15)  |       |                          | Customer phone number               |
+
+          
+*Order Table*
+| Column Name | Data Type     | Key   | Constraints                     | Description                      |
+| ----------- | ------------- | ----- | ------------------------------- | -------------------------------- |
+| OrderID     | INT           |  PK   | NOT NULL, AUTO_INCREMENT        | Unique identifier for each order |
+| CustomerID  | INT           |  FK   | NOT NULL → Customer(CustomerID) | Customer who placed the order    |
+| OrderDate   | DATE          |       | NOT NULL                        | Date when the order was placed   |
+| TotalAmount | DECIMAL(10,2) |       | NOT NULL                        | Total amount of the order        |
+
+*Product Table*
+| Column Name | Data Type     | Key   | Constraints                     | Description                    |
+| ----------- | ------------- | ----- | ------------------------------- | ------------------------------ |
+| ProductID   | INT           |  PK   | NOT NULL, AUTO_INCREMENT        | Unique identifier for product  |
+| Name        | VARCHAR(100)  |       | NOT NULL                        | Product name                   |
+| Description | TEXT          |       |                                 | Product description            |
+| UnitPrice   | DECIMAL(10,2) |       | NOT NULL                        | Price per unit                 |
+| SupplierID  | INT           |  FK | NOT NULL → Supplier(SupplierID) | Supplier providing the product   |
+
+*Shipment Table*
+| Column Name    | Data Type   | Key   | Constraints               | Description                    |
+| -------------- | ----------- | ----- | ------------------------- | ------------------------------ |
+| ShipmentID     | INT         | 🔑 PK | NOT NULL, AUTO_INCREMENT  | Unique identifier for shipment |
+| OrderID        | INT         | 🔗 FK | NOT NULL → Order(OrderID) | Order associated with shipment |
+| ShipmentDate   | DATE        |       | NOT NULL                  | Date shipment was sent         |
+| Carrier        | VARCHAR(50) |       |                           | Delivery carrier               |
+| TrackingNumber | VARCHAR(50) |       |                           | Tracking number for shipment   |
