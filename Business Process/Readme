@@ -1,0 +1,7 @@
+Phase II 
+focuses on modeling the business processes relevant to the Mine Safety Violation Monitoring System (MSVMS).
+It involves defining the process scope, identifying key actors, and mapping all activities using BPMN 2.0 
+swimlanes to show responsibilities and workflow interactions. 
+The model captures the entire lifecycle of a safety violation—from detection and reporting, through automated system actions, inspections, remediation, verification, and final closure.
+Proper BPMN notation is applied to represent events, tasks, gateways, and system flows, ensuring a logical, structured, and MIS-aligned representation.
+This phase produces a complete process diagram and a short documentation explaining objectives, actors, system roles, organizational impact, and opportunities for analytics.
